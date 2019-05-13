@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="pong64" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_but_64_bit" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/pong64" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_but_64_bit" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-flto" />
+					<Add option="-m64" />
+				</Compiler>
+				<Linker>
+					<Add option="-O3" />
+					<Add option="-flto" />
+					<Add option="-static-libgcc" />
+					<Add option="-m64" />
+				</Linker>
+			</Target>
+			<Target title="Ready!">
+				<Option platforms="Windows;" />
+				<Option output="bin/Release/pong64" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Release" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gnu_gcc_compiler_but_64_bit" />
+				<Compiler>
+					<Add option="-march=corei7-avx" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-flto" />
+					<Add option="-O2" />
+					<Add option="-m64" />
+					<Add directory="D:/desktop/pong64/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-flto" />
+					<Add option="-s" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
+					<Add option="-m64" />
+					<Add library="glfw3" />
+					<Add library="opengl32" />
+					<Add library="glew32" />
+					<Add directory="lib-mingw" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++14" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Linker>
+			<Add option="-static-libstdc++" />
+			<Add option="-static-libgcc" />
+			<Add option="-static" />
+			<Add library="glfw3" />
+			<Add library="opengl32" />
+		</Linker>
+		<Unit filename="fs.shader">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="main.cpp" />
+		<Unit filename="vs.shader">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
