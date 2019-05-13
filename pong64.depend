@@ -40,3 +40,18 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
+1557738466 source:d:\desktop\c++\github\main.cpp
+	"include/GL/glew.h"
+	<GL/gl.h>
+	<GLFW/glfw3.h>
+	<string>
+
+1548674870 d:\desktop\c++\github\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
