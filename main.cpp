@@ -2,15 +2,17 @@
 //#include <iostream>
  //#define __LCC__
  //#define GLFWAPI __declspec(dllimport)
-#include "include/GL/glew.h"
+//#include "include/GL/glew.h"
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
-//#include <iostream>
+#include <iostream>
 #include <string>
 //#include <fstream>
 
 
 using namespace std;
+
+bool opengl_inited = false;
 
 int screenx, screeny;
 
@@ -197,7 +199,7 @@ int main(int argc, char *argv[])
 
 		const float amountoftimeout = 0.4;
 
-		if(state != 1) {
+		if(state == 99) {//contoller support in menu's (it crashed the application so its never used)
             double timeouts[10];
             if((axes[1] > deadzone || axes2[1] > deadzone) && timeouts[0] < 0.1) {
                 timeouts[0] = amountoftimeout;
@@ -305,18 +307,21 @@ bool setresolution (int scrx, int scry) {
 	xscale = screenx / 100;
 	yscale = screeny / 100;
 
-	glfwTerminate();
-	if( !glfwInit() )
-	{
-		return false;
-	}
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE );
-	glfwWindowHint(GLFW_STEREO, GL_FALSE);
-	glfwWindowHint(GLFW_ALPHA_BITS, 0);
-	glfwWindowHint(GLFW_DEPTH_BITS, 0);
-	glfwWindowHint(GLFW_STENCIL_BITS, 0);
-	glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR, GLFW_RELEASE_BEHAVIOR_NONE);
+    glfwTerminate();
+    if( !glfwInit() )
+    {
+        return false;
+    }
+
+    if(!opengl_inited) {
+        glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE );
+        glfwWindowHint(GLFW_STEREO, GL_FALSE);
+        glfwWindowHint(GLFW_ALPHA_BITS, 0);
+        glfwWindowHint(GLFW_DEPTH_BITS, 0);
+        glfwWindowHint(GLFW_STENCIL_BITS, 0);
+        glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR, GLFW_RELEASE_BEHAVIOR_NONE);
+    }
 
 	if(!fullscreen) {
         window = glfwCreateWindow( screenx, screeny, "Pong (OpenGL)", NULL, NULL );
@@ -330,23 +335,25 @@ bool setresolution (int scrx, int scry) {
 	}
 
 
+
 	glfwMakeContextCurrent(window);
 
-	printf("this is pretty close to the end now");
+	//printf("this is pretty close to the end now");
 
 
 	// set up view
-	glViewport( 0, 0, screenx, screeny );
+	//glViewport( 0, 0, screenx, screeny );
 	glMatrixMode( GL_NONE );
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable( GL_BLEND );
-	glLoadIdentity();
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glEnable( GL_BLEND );
+	//glLoadIdentity();
 
 	glOrtho(0.0,screenx,0.0,screeny,0.0,1.0); // this creates a canvas you can do 2D drawing on
 
-	glfwSetKeyCallback(window, key_callback);
+	if(!opengl_inited) glfwSetKeyCallback(window, key_callback);
 
 	if(vsync) glfwSwapInterval( 1 ); else glfwSwapInterval( 0 );
+	opengl_inited = true;
 	return true;
 }
 
@@ -406,6 +413,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 				if(vsync)vsync = false;
 				else vsync = true;
                 setresolution(screenx, screeny);
+
 				menuitem = 6;
 			break;
 			case 4:
@@ -451,7 +459,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}else if(state == 5 && action ==GLFW_PRESS && (key == 257 || key == 32)) {
 		//^^ if pressed enter
 		setresolution(screenx, screeny);
+		//cout << "made it out alive" << endl;
 		state = 3;
+		return;
 	}else if(state ==6 && action == GLFW_PRESS && key > 47 && key < 58) {
 		//change screen resolution y
 		double tempor = *temp;
