@@ -55,3 +55,18 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
+1557760732 source:/home/jesse/c++/cpp_pong/main.cpp
+	"include/GL/glew.h"
+	<GL/gl.h>
+	<GLFW/glfw3.h>
+	<string>
+
+1557760732 /home/jesse/c++/cpp_pong/include/GL/glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
